@@ -1,0 +1,51 @@
+{% extends "frontend/base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-6">📊 Dashboard Financeiro</h2>
+
+<!-- Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-white p-6 rounded shadow">
+        <p class="text-gray-500">Entradas</p>
+        <h3 id="entradas" class="text-2xl font-bold text-green-600">R$ 0</h3>
+    </div>
+
+    <div class="bg-white p-6 rounded shadow">
+        <p class="text-gray-500">Saídas</p>
+        <h3 id="saidas" class="text-2xl font-bold text-red-600">R$ 0</h3>
+    </div>
+
+    <div class="bg-white p-6 rounded shadow">
+        <p class="text-gray-500">Saldo</p>
+        <h3 id="saldo" class="text-2xl font-bold text-blue-600">R$ 0</h3>
+    </div>
+</div>
+
+<!-- Gráfico -->
+<div class="bg-white p-6 rounded shadow">
+    <canvas id="financeChart"></canvas>
+</div>
+
+<script>
+fetch("/api/finance/transactions/dashboard/")
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("entradas").innerText = "R$ " + data.entradas
+        document.getElementById("saidas").innerText = "R$ " + data.saidas
+        document.getElementById("saldo").innerText = "R$ " + data.saldo
+
+        new Chart(document.getElementById("financeChart"), {
+            type: "bar",
+            data: {
+                labels: ["Entradas", "Saídas"],
+                datasets: [{
+                    data: [data.entradas, data.saidas],
+                    backgroundColor: ["#16a34a", "#dc2626"]
+                }]
+            }
+        })
+    })
+</script>
+
+{% endblock %}

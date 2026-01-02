@@ -1,0 +1,23 @@
+{% extends "frontend/base.html" %}
+{% block content %}
+
+<h2 class="text-xl font-bold mb-4">💸 Transações</h2>
+
+<table class="w-full bg-white rounded shadow">
+    <thead class="bg-gray-200">
+        <tr>
+            <th class="p-2">Descrição</th>
+            <th>Valor</th>
+            <th>Tipo</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody 
+      hx-get="/api/finance/transactions/" 
+      hx-trigger="load"
+      hx-swap="innerHTML">
+    </tbody>
+</table>
+
+{% endblock %}
