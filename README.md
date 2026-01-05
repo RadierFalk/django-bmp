@@ -12,7 +12,7 @@ Sistema financeiro multi-tenant desenvolvido com Django.
 ## ⚙️ Como rodar o projeto
 
 ```bash
-git clone https://github.com/seu_usuario/django-bmp.git
+git clone https://github.com/RadierFalk/django-bmp.git
 cd django-bmp
 python -m venv venv
 source venv/bin/activate
